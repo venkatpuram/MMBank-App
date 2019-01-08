@@ -126,6 +126,7 @@ public class AccountCUI {
 			System.out.println("3.Sort By Account Balance");
 			System.out.println("4.Enter account balance range to sort in ascending order of the balance");
 			System.out.println("5.Enter account balance range to sort in descending order of the balance");
+			System.out.println("6.Sort By Account Balance in descending order");
 			int choose = scanner.nextInt();
 			List<SavingsAccount> savingsAccountsList = null;
 			switch(choose){
@@ -189,6 +190,17 @@ public class AccountCUI {
 						e.printStackTrace();
 					}
 					break;
+				case 6:
+					try {
+						savingsAccountsList=savingsAccountService.sortByAccountBalanceInDescendingOrder();
+						for(SavingsAccount savings: savingsAccountsList){
+							System.out.println(savings);
+							}
+					} catch (ClassNotFoundException | SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}						
+						break;
 			}
 		}while(true);
 	}

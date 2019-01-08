@@ -38,6 +38,8 @@ public interface SavingsAccountService {
 
 	List<SavingsAccount> sortByBalanceRangeInDescendingOrder(int minBalance, int maxBalance) throws ClassNotFoundException, SQLException;
 
+	List<SavingsAccount> sortByAccountBalanceInDescendingOrder() throws ClassNotFoundException, SQLException;
+
 	
 
 		

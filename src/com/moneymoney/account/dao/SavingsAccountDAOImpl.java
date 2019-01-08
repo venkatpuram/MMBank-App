@@ -243,10 +243,30 @@ public class SavingsAccountDAOImpl implements SavingsAccountDAO {
 			int minBalance, int maxBalance) throws ClassNotFoundException, SQLException{
 		List<SavingsAccount> savingsAccount=new ArrayList<>();
 		Connection connection=DBUtil.getConnection();
-		PreparedStatement preparedStatementQuery = connection.prepareStatement("SELECT * FROM account WHERE account_bal BETWEEN ? and ? ORDER BY account_bal");
+		PreparedStatement preparedStatementQuery = connection.prepareStatement("SELECT * FROM account WHERE account_bal BETWEEN ? and ? ORDER BY account_bal DESC");
 		preparedStatementQuery.setDouble(1, minBalance);
 		preparedStatementQuery.setDouble(2, maxBalance);
 		ResultSet resultSet = preparedStatementQuery.executeQuery();
+		while(resultSet.next())
+		{
+			int accountNumber = resultSet.getInt(1);
+			String accountHolderName = resultSet.getString("account_hn");
+			double accountBalance = resultSet.getDouble(3);
+			boolean salary = resultSet.getBoolean("salary");
+			SavingsAccount savingsAccountList = new SavingsAccount(accountNumber,
+					accountHolderName, accountBalance, salary);
+			savingsAccount.add(savingsAccountList);
+		}
+		DBUtil.commit();
+		return savingsAccount;
+	}
+
+	@Override
+	public List<SavingsAccount> sortByAccountBalanceInDescendingOrder() throws SQLException, ClassNotFoundException {
+		List<SavingsAccount> savingsAccount=new ArrayList<>();
+		Connection connection=DBUtil.getConnection();
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery("SELECT * FROM account ORDER BY account_bal DESC");
 		while(resultSet.next())
 		{
 			int accountNumber = resultSet.getInt(1);

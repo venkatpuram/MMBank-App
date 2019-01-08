@@ -23,6 +23,7 @@ public interface SavingsAccountDAO {
 	List<SavingsAccount> sortByAccountBalance() throws ClassNotFoundException, SQLException;
 	List<SavingsAccount> sortByBalanceRange(int minimumBalance,int maximumBalance) throws ClassNotFoundException, SQLException;
 	List<SavingsAccount> sortByBalanceRangeInDescendingOrder(int minBalance, int maxBalance) throws ClassNotFoundException, SQLException;
+	List<SavingsAccount> sortByAccountBalanceInDescendingOrder() throws ClassNotFoundException, SQLException;
 	
 	
 	

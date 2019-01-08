@@ -124,6 +124,11 @@ public class SavingsAccountServiceImpl implements SavingsAccountService {
 		return savingsAccountDAO.sortByBalanceRangeInDescendingOrder(minBalance,maxBalance);
 	}
 
+	@Override
+	public List<SavingsAccount> sortByAccountBalanceInDescendingOrder() throws ClassNotFoundException, SQLException {
+		return savingsAccountDAO.sortByAccountBalanceInDescendingOrder();
+	}
+
 	
 
 	
